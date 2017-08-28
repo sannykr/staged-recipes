@@ -1,0 +1,43 @@
+{% set name = "newrelic" %}
+{% set version = "2.88.1.73" %}
+{% set sha256 = "93452f678b63a537f63a2b8d6caccc3506f5db72586f12a1673cfc16bbe3147b" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+
+test:
+  imports:
+    - collectfast
+
+about:
+  home: https://github.com/jazzband/collectfast
+  license: MIT
+  license_family: MIT
+  license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'
+  summary: 'A Faster Collectstatic '
+  description: |
+    The fast collectstatic for Django projects with S3 as storage backend.
+  doc_url: https://github.com/jazzband/collectfast
+  dev_url: https://github.com/jazzband/collectfast
+
+extra:
+  recipe-maintainers:
+    - cshaley
+    - sannykr
