@@ -1,0 +1,43 @@
+{% set name = "highcharts" %}
+{% set version = "6.0.2" %}
+{% set sha256 = "ae30d230e9bee946501de123746f2ee131824bc24b107c327253ca91a7154cb1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/highcharts/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script: npm install -g .
+
+requirements:
+  build:
+    - nodejs
+  
+test:
+  commands:
+    - npm list -g highcharts
+  requires:
+    - nodejs
+   
+
+about:
+  home: https://github.com/highcharts/highcharts
+  license: 
+  license_family: 
+  license_file: 
+  summary: 'Highcharts JS, the JavaScript charting framework'
+  description: |
+    Highcharts JS is a JavaScript charting library based on SVG, with fallbacks to VML and canvas for old browsers.
+  doc_url: http://www.highcharts.com/docs/
+  dev_url: https://github.com/highcharts/highcharts
+
+extra:
+  recipe-maintainers:
+    - cshaley
+    - sannykr
